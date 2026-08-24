@@ -21,15 +21,16 @@ const soplido = document.getElementById("soplido");
 const cancion = document.getElementById("cancion");
 const llama = document.querySelector(".llama");
 
-llama.addEventListener("click", () => {
-  soplido.currentTime = 0;
-  soplido.play();
+function reproducir(audio) {
+  audio.currentTime = 0;
+  return audio.play().catch(() => undefined);
+}
 
-  llama.style.animation = "apagar 0.5s forwards"; // forwards -> Ultimo frame (to)
+llama.addEventListener("click", () => {
+  reproducir(soplido);
 
   setTimeout(() => {
-    cancion.currentTime = 0;
-    cancion.play();
+    reproducir(cancion);
     overlay.classList.add("hidden");
   }, 1000);
 });
